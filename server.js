@@ -692,7 +692,8 @@ io.sockets.on('connection', function (appSocket) {
 
                     } else if (data.indexOf('Grbl') === 0) { // Check if it's Grbl
                         firmware = 'grbl';
-                        fVersion = data.substr(5, 4); // get version
+                        var versionStart = data.indexOf(' ');
+                        fVersion = data.substr(versionStart, 4); // get version
                         fDate = '';
                         writeLog('GRBL detected (' + fVersion + ')', 1);
                         io.sockets.emit('firmware', {firmware: firmware, version: fVersion, date: fDate});
